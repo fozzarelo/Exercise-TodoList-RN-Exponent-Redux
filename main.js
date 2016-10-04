@@ -1,5 +1,5 @@
 import Exponent from 'exponent'
-import { Navigator, Text } from 'react-native'
+import { Navigator } from 'react-native'
 import React from 'react'
 import TaskList from './dev/taskList'
 import TaskForm from './dev/taskForm'
@@ -15,22 +15,37 @@ class App extends React.Component {
     }
   }
 
-  addBP() {
+  gotoAddBP() {
+    console.log('going to add')
     this.nav.push({
       name: 'taskForm',
     })
+  }
+
+  cancelBP() {
+    this.nav.pop()
+  }
+
+  addTask(task) {
+    console.log('gonna add a new task', task)
+    this.state.todos.push({ task })
+    this.setState({ todos: this.state.todos })
+    this.nav.pop()
   }
 
   renderScene(route, nav) {
     switch (route.name) {
     case 'taskForm':
       return (
-          <TaskForm />
+          <TaskForm
+              addTask={this.addTask.bind(this)}
+              cancelBP={this.cancelBP.bind(this)}
+          />
         );
     default:
       return (
           <TaskList
-              addBP={this.addBP.bind(this)}
+              gotoAddBP={this.gotoAddBP.bind(this)}
               todos = {this.state.todos}
           />
         );
@@ -45,7 +60,7 @@ class App extends React.Component {
     return (
       <Navigator
           configureScene={this.configureScene}
-          initialRoute={{ name: 'taskForm', index: 0 }}
+          initialRoute={{ name: 'TaskList', index: 0 }}
           ref={((nav) => {this.nav = nav})}
           renderScene={this.renderScene.bind(this)}
       />

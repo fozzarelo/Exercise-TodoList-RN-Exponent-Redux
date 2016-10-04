@@ -37,6 +37,11 @@ class TaskList extends React.Component {
       this.state = { dataSource: ds.cloneWithRows(props.todos) }
     }
 
+    componentWillReceiveProps(nextProps) {
+      const dataSource = this.state.dataSource.cloneWithRows(nextProps.todos);
+      this.setState({ dataSource })
+    }
+
     renderRow(todo) {
       return (
         <TaskRow
@@ -54,7 +59,7 @@ class TaskList extends React.Component {
           />
 
           <TouchableHighlight
-              onPress={this.props.addBP}
+              onPress={this.props.gotoAddBP}
               style={styles.button}
           >
             <Text style={styles.buttonText}>
@@ -67,7 +72,7 @@ class TaskList extends React.Component {
 }
 
 TaskList.propTypes = {
-  addBP: React.PropTypes.func.isRequired,
+  gotoAddBP: React.PropTypes.func.isRequired,
   todos: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
 }
 export default TaskList
