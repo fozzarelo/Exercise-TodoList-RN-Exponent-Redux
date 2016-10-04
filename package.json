@@ -1,0 +1,19 @@
+{
+  "name": "expotonga",
+  "version": "0.0.0",
+  "description": "Todo list using exponent, react native, and redux",
+  "author": null,
+  "private": true,
+  "main": "main.js",
+  "dependencies": {
+    "exponent": "~10.0.0",
+    "react": "~15.3.1",
+    "react-native": "github:exponentjs/react-native#sdk-10.1.0",
+    "react-native-tab-navigator": "^0.3.3",
+
+    "babel-eslint": "4.1.6",
+    "eslint": "1.10.3",
+    "eslint-config-airbnb": "2.1.1",
+    "eslint-plugin-react": "3.12.0"
+  }
+}
