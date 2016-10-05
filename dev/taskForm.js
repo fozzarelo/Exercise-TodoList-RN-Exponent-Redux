@@ -47,7 +47,9 @@ class TaskForm extends React.Component {
   }
 
   addBP() {
-    this.props.addTask(this.task)
+    if (this.task !== undefined) {
+      this.props.addTask(this.task)
+    }
   }
 
   render() {

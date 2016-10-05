@@ -33,6 +33,13 @@ class App extends React.Component {
     this.nav.pop()
   }
 
+  killTask(todo) {
+    const filteredTodos = this.state.todos.filter((filterTodo) => {
+      return filterTodo !== todo
+    })
+    this.setState({ todos: filteredTodos })
+  }
+
   renderScene(route, nav) {
     switch (route.name) {
     case 'taskForm':
@@ -46,6 +53,7 @@ class App extends React.Component {
       return (
           <TaskList
               gotoAddBP={this.gotoAddBP.bind(this)}
+              onDone={this.killTask.bind(this)}
               todos = {this.state.todos}
           />
         );
