@@ -1,8 +1,8 @@
 import Exponent from 'exponent'
 import { Navigator } from 'react-native'
 import React from 'react'
-import TaskList from './dev/taskList'
-import TaskForm from './dev/taskForm'
+import TaskList from './dev/TaskList'
+import TaskForm from './dev/TaskForm'
 
 class App extends React.Component {
   constructor() {

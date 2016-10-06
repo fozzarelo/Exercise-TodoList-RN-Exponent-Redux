@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, View, ListView, TouchableHighlight, Text } from 'react-native'
-import TaskRow from './taskRow'
+import TaskRow from './TaskRow/Component'
 
 const styles = StyleSheet.create(
   {
