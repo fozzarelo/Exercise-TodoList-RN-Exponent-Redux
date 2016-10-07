@@ -3,16 +3,15 @@ import { Navigator } from 'react-native'
 import React from 'react'
 import TaskList from './dev/TaskList'
 import TaskForm from './dev/TaskForm'
+import store from './dev/TaskStore'
 
 class App extends React.Component {
   constructor() {
     super()
-    this.state = {
-      todos: [
-        { task: 'task_one' },
-        { task: 'task_two' },
-      ],
-    }
+    this.state = store.getState()
+    store.subscribe(() => {
+      this.setState(store.getState())
+    })
   }
 
   gotoAddBP() {
@@ -27,17 +26,25 @@ class App extends React.Component {
   }
 
   addTask(task) {
-    console.log('gonna add a new task', task)
-    this.state.todos.push({ task })
-    this.setState({ todos: this.state.todos })
+    // console.log('gonna add a new task', task)
+    // this.state.todos.push({ task })
+    // this.setState({ todos: this.state.todos })
+    store.dispatch({
+      type: 'Add_task',
+      task,
+    })
     this.nav.pop()
   }
 
   killTask(todo) {
-    const filteredTodos = this.state.todos.filter((filterTodo) => {
-      return filterTodo !== todo
+    // const filteredTodos = this.state.todos.filter((filterTodo) => {
+    //   return filterTodo !== todo
+    // })
+    // this.setState({ todos: filteredTodos })
+    store.dispatch({
+      type: 'Kill_task',
+      todo,
     })
-    this.setState({ todos: filteredTodos })
   }
 
   renderScene(route, nav) {

@@ -5,7 +5,7 @@ import Swipeout from 'react-native-swipeout'
 const styles = StyleSheet.create(
   {
     rowContainer: {
-      marginBottom: 20,
+      marginBottom: 15,
     },
     textContainer: {
       padding: 20,
@@ -28,7 +28,7 @@ export default function Render() {
   let fade = new Animated.Value(1)
 
   function handleDoneBP() {
-    Animated.timing(fade, { toValue: 0, duration: 500 }).start();
+  //  Animated.timing(fade, { toValue: 0.2, duration: 500 }).start();
     setTimeout(x => { this.doneBP.bind(this)() }, 500)
     fade = new Animated.Value(1)
   }
