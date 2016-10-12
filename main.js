@@ -36,14 +36,21 @@ class App extends React.Component {
     this.nav.pop()
   }
 
-  killTask(todo) {
+  doneTask(todo) {
     // const filteredTodos = this.state.todos.filter((filterTodo) => {
     //   return filterTodo !== todo
     // })
     // this.setState({ todos: filteredTodos })
     store.dispatch({
-      type: 'Kill_task',
+      type: 'Done_task',
       todo,
+    })
+  }
+
+  toggle() {
+    console.log('calling store dispatch')
+    store.dispatch({
+      type: 'Toggle',
     })
   }
 
@@ -59,8 +66,10 @@ class App extends React.Component {
     default:
       return (
           <TaskList
+              filter={this.state.filter}
               gotoAddBP={this.gotoAddBP.bind(this)}
-              onDone={this.killTask.bind(this)}
+              onDone={this.doneTask.bind(this)}
+              onToggle={this.toggle.bind(this)}
               todos = {this.state.todos}
           />
         );
