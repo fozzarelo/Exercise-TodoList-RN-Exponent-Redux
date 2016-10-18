@@ -13,18 +13,15 @@ class App extends React.Component {
       this.setState(store.getState())
     })
   }
-
   gotoAddBP() {
     console.log('going to add')
     this.nav.push({
       name: 'taskForm',
     })
   }
-
   cancelBP() {
     this.nav.pop()
   }
-
   addTask(task) {
     // console.log('gonna add a new task', task)
     // this.state.todos.push({ task })
@@ -35,7 +32,20 @@ class App extends React.Component {
     })
     this.nav.pop()
   }
-
+  deleteTask(todo) {
+    console.log('dipatching deleteTask')
+    store.dispatch({
+      type: 'Delete_task',
+      todo,
+    })
+  }
+  pendingTask(todo) {
+    console.log('dispatching pendingTask')
+    store.dispatch({
+      type: 'Pending_task',
+      todo,
+    })
+  }
   doneTask(todo) {
     // const filteredTodos = this.state.todos.filter((filterTodo) => {
     //   return filterTodo !== todo
@@ -46,7 +56,6 @@ class App extends React.Component {
       todo,
     })
   }
-
   toggle() {
     console.log('calling store dispatch')
     store.dispatch({
@@ -68,7 +77,9 @@ class App extends React.Component {
           <TaskList
               filter={this.state.filter}
               gotoAddBP={this.gotoAddBP.bind(this)}
+              onDelete={this.deleteTask.bind(this)}
               onDone={this.doneTask.bind(this)}
+              onPending={this.pendingTask.bind(this)}
               onToggle={this.toggle.bind(this)}
               todos = {this.state.todos}
           />

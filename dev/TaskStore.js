@@ -36,10 +36,30 @@ function taskStore(state = defState, action) {
       filter,
     })
     return result
+  case 'Delete_task':
+    updatedList = state.allTodos.filter(item => item !== action.todo)
+    result = Object.assign({}, state, {
+      allTodos: updatedList,
+      todos: updatedList.filter(item => item.status === state.filter),
+    })
+    return result
+  case 'Pending_task':
+    const pendingTodo = Object.assign({}, action.todo, {
+      status: 'pending',
+    })
+    updatedList = state.allTodos.map(item => {
+      return item === action.todo ? pendingTodo : item
+    })
+    result = Object.assign({}, state, {
+      allTodos: updatedList,
+      todos: updatedList.filter(todo => todo.status === state.filter),
+    })
+    return result
   case 'Done_task':
     const doneTodo = Object.assign({}, action.todo, {
       status: 'done',
     })
+    console.log(doneTodo)
     updatedList = state.allTodos.map(item => {
       return item === action.todo ? doneTodo : item
     })

@@ -25,21 +25,17 @@ const styles = StyleSheet.create(
 )
 
 export default function Render() {
-  let fade = new Animated.Value(1)
+  const fade = new Animated.Value(1)
 
   function handleDoneBP() {
-    Animated.timing(fade, { toValue: 0.1, duration: 500 }).start();
-    setTimeout(x => { this.doneBP.bind(this)() }, 500)
-    fade = new Animated.Value(1)
+    Animated.timing(fade, { toValue: 0.1, duration: 250 }).start(x => this.doneBP.bind(this)())
   }
-
   function handleDeleteBP() {
-    console.log('processing delete')
+    Animated.timing(fade, { toValue: 0.1, duration: 250 }).start(x => this.deleteBP.bind(this)())
   }
   function handlePendingBP() {
-    console.log('procesing pending')
+    Animated.timing(fade, { toValue: 0.2, duration: 250 }).start(x => this.pendingBP.bind(this)())
   }
-
   let swipeItems = [
     {
       text: 'Done',
@@ -48,8 +44,7 @@ export default function Render() {
       onPress: handleDoneBP.bind(this),
     },
   ]
-
-  if (this.props.todo.status === 'done') {
+  if (this.props.todo && this.props.todo.status === 'done') {
     swipeItems = [
       {
         text: 'Delete',
@@ -65,17 +60,19 @@ export default function Render() {
       },
     ]
   }
-
-
+  Animated.timing(fade, { toValue: 1, duration: 0.1 }).start();
   return (
-    <Animated.View style={[styles.rowContainer, { opacity: fade }]}>
-      <Swipeout right={swipeItems}>
+    <View style={styles.rowContainer}>
+      <Swipeout
+          autoClose
+          right={swipeItems}
+      >
           <View style={styles.textContainer}>
-            <Text style = {styles.label}>
+            <Animated.Text style = {[styles.label, { opacity: fade }]}>
               {this.props.todo.task}
-            </Text>
+            </Animated.Text>
           </View>
       </Swipeout>
-    </Animated.View>
+    </View>
   );
 }

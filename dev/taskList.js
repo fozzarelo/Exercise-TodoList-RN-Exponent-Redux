@@ -58,7 +58,9 @@ class TaskList extends React.Component {
     renderRow(todo) {
       return (
         <TaskRow
+            onDelete={this.props.onDelete}
             onDone={this.props.onDone}
+            onPending={this.props.onPending}
             todo = {todo}
         />
       );
