@@ -78,7 +78,6 @@ class TaskList extends React.Component {
               enableEmptySections
               renderRow={this.renderRow.bind(this)}
           />
-
           <TouchableHighlight
               onPress={this.props.gotoAddBP}
               style={styles.button}
