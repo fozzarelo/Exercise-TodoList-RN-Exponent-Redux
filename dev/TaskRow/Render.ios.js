@@ -28,12 +28,19 @@ export default function Render() {
   let fade = new Animated.Value(1)
 
   function handleDoneBP() {
-  //  Animated.timing(fade, { toValue: 0.2, duration: 500 }).start();
+    Animated.timing(fade, { toValue: 0.1, duration: 500 }).start();
     setTimeout(x => { this.doneBP.bind(this)() }, 500)
     fade = new Animated.Value(1)
   }
 
-  const swipeItems = [
+  function handleDeleteBP() {
+    console.log('processing delete')
+  }
+  function handlePendingBP() {
+    console.log('procesing pending')
+  }
+
+  let swipeItems = [
     {
       text: 'Done',
       backgroundColor: '#5D5D00',
@@ -41,6 +48,24 @@ export default function Render() {
       onPress: handleDoneBP.bind(this),
     },
   ]
+
+  if (this.props.todo.status === 'done') {
+    swipeItems = [
+      {
+        text: 'Delete',
+        backgroundColor: '#5DAA00',
+        underlayColor: '#5D5D50',
+        onPress: handleDeleteBP.bind(this),
+      },
+      {
+        text: 'Pending',
+        backgroundColor: '#5D5D00',
+        underlayColor: '#5D5D50',
+        onPress: handlePendingBP.bind(this),
+      },
+    ]
+  }
+
 
   return (
     <Animated.View style={[styles.rowContainer, { opacity: fade }]}>

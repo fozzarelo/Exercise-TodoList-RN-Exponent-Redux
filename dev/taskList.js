@@ -34,6 +34,9 @@ const styles = StyleSheet.create(
       paddingTop: 5,
       paddingLeft: 15,
     },
+    switch: {
+      marginLeft: 15,
+    },
   }
 )
 class TaskList extends React.Component {
@@ -67,6 +70,7 @@ class TaskList extends React.Component {
           <View style={styles.switchRow}>
             <Switch
                 onValueChange={this.props.onToggle}
+                style={styles.switch}
                 value={this.props.filter !== 'pending'}
             />
             <Text style={styles.switchText}>

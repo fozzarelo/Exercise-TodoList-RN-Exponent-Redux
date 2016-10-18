@@ -17,6 +17,7 @@ TaskRow.propTypes = {
   onDone: React.PropTypes.func.isRequired,
   todo: React.PropTypes.shape({
     task: React.PropTypes.string.isRequired,
+    status: React.PropTypes.string.isRequired,
   }).isRequired,
 
 }
